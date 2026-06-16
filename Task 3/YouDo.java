@@ -35,3 +35,32 @@ public class UserRepository{
         }
     }
 }
+
+
+
+//Main
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+
+        UserRepository repository = new UserRepository();
+
+        System.out.println("---- User Registration System ----");
+
+        System.out.println("Please enter a username: ");
+        String inputUsername = scan.nextLine();
+
+        System.out.println("Please enter an email address: ");
+        String inputEmail= scan.nextLine();
+
+        User interactiveUser = new User(inputUsername, inputEmail);
+
+        System.out.println("\nProcessing....");
+
+        repository.saveToDatabase(interactiveUser);
+
+        scan.close();
+    }
+}
