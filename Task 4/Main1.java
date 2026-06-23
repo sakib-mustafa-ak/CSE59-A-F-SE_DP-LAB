@@ -1,8 +1,8 @@
-public interface Shape {
+interface Shape {
     double calculateTotalArea();
 }
 
-public class Rectangle implements Shape{
+class Rectangle implements Shape{
     public double length;
     public double width;
 
@@ -17,7 +17,7 @@ public class Rectangle implements Shape{
     }
 }
 
-public class Circle implements Shape{
+class Circle implements Shape{
     public double radius;
 
     public Circle(double radius){
@@ -30,17 +30,11 @@ public class Circle implements Shape{
     }
 }
 
-public class AreaCalculator {
-    public double calculateTotalArea(Object[] shapes) {
+class AreaCalculator {
+    public double calculateTotalArea(Shape[] shapes) {
         double area = 0;
-        for (Object shape : shapes) {
-            if (shape instanceof Rectangle) {
-                Rectangle r = (Rectangle) shape;
-                area += r.length * r.width;
-            } else if (shape instanceof Circle) {
-                Circle c = (Circle) shape;
-                area += Math.PI * (c.radius * c.radius);
-            }
+        for (Shape shape : shapes) {
+            area += shape.calculateTotalArea();
         }
         return area;
     }
@@ -49,7 +43,17 @@ public class AreaCalculator {
 
 public class Main1 {
     public static void main(String[] args) {
-        
+        Shape[] shapes = new Shape[]{
+            new Rectangle(5.0,  4.00),
+            new Circle(3.0),
+            new Rectangle(2.0,3.5)
+        };
+
+        AreaCalculator calculator = new AreaCalculator();
+
+        double totalArea = calculator.calculateTotalArea(shapes);
+
+        System.out.printf("Total Area of all shapes: %.2f\n", totalArea);
+
     }
 }
-
